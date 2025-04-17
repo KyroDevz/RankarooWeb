@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>API Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center border-b">
+      <h1 class="text-xl font-bold">📘 API Documentation</h1>
+      <a href="../index.html" class="text-sm text-gray-500 hover:text-gray-800">← Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-50 border-r hidden lg:block">
+        <div class="p-6">
+            <h2 class="text-lg font-semibold mb-4">Search Docs</h2>
+            <input
+              id="searchBox"
+              type="text"
+              placeholder="Search..."
+              class="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring focus:border-blue-300"
+            />
+          
+            <ul id="navLinks" class="space-y-2 text-sm">
+              <li><a href="#intro" class="doc-link hover:text-gray-900">Introduction</a></li>
+              <li><a href="#auth" class="doc-link hover:text-gray-900">Authentication</a></li>
+              <li><a href="#get-users" class="doc-link hover:text-gray-900">GET /users</a></li>
+              <li><a href="#post-user" class="doc-link hover:text-gray-900">POST /users</a></li>
+              <li><a href="#errors" class="doc-link hover:text-gray-900">Error Codes</a></li>
+            </ul>
+          </div>
+          
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-6 py-10 max-w-4xl mx-auto">
+
+      <!-- Section: Introduction -->
+      <section id="intro" class="mb-12">
+        <h2 class="text-2xl font-bold mb-2">📘 Introduction</h2>
+        <p class="text-gray-700">
+          Welcome to the API Documentation. Here you'll find all the information you need to interact with our RESTful API.
+        </p>
+      </section>
+
+      <!-- Section: Authentication -->
+      <section id="auth" class="mb-12">
+        <h2 class="text-2xl font-bold mb-2">🔐 Authentication</h2>
+        <p class="text-gray-700 mb-2">All requests must include an API key:</p>
+        <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800 overflow-x-auto">
+Authorization: Bearer YOUR_API_KEY
+        </pre>
+      </section>
+
+      <!-- Section: GET /users -->
+      <section id="get-users" class="mb-12">
+        <h2 class="text-2xl font-bold mb-2">📄 GET /users</h2>
+        <p class="text-gray-700 mb-2">Returns a list of users.</p>
+        <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800 overflow-x-auto">
+GET https://yourapi.com/users
+        </pre>
+        <p class="mt-2 text-gray-700">Response:</p>
+        <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800 overflow-x-auto">
+[
+  {
+    "id": 1,
+    "name": "Alice"
+  },
+  {
+    "id": 2,
+    "name": "Bob"
+  }
+]
+        </pre>
+      </section>
+
+      <!-- Section: POST /users -->
+      <section id="post-user" class="mb-12">
+        <h2 class="text-2xl font-bold mb-2">📤 POST /users</h2>
+        <p class="text-gray-700 mb-2">Creates a new user.</p>
+        <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800 overflow-x-auto">
+POST https://yourapi.com/users
+Content-Type: application/json
+
+{
+  "name": "Charlie"
+}
+        </pre>
+        <p class="mt-2 text-gray-700">Response:</p>
+        <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800 overflow-x-auto">
+{
+  "id": 3,
+  "name": "Charlie"
+}
+        </pre>
+      </section>
+
+      <!-- Section: Error Codes -->
+      <section id="errors" class="mb-12">
+        <h2 class="text-2xl font-bold mb-2">🚨 Error Codes</h2>
+        <ul class="list-disc pl-6 text-gray-700">
+          <li><strong>400 Bad Request:</strong> Missing or invalid parameters</li>
+          <li><strong>401 Unauthorized:</strong> Invalid API key</li>
+          <li><strong>404 Not Found:</strong> Resource does not exist</li>
+          <li><strong>500 Server Error:</strong> Something went wrong</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchBox');
+    const links = document.querySelectorAll('#navLinks .doc-link');
+  
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      links.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        link.parentElement.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+  
+  <script src="../scripts/notification.js"></script>
+
+</body>
+</html>
